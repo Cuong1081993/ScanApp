@@ -7,6 +7,9 @@ import App2 from "../App2";
 import fileDownload from "js-file-download";
 import { DownloadOutlined, UploadOutlined } from "@ant-design/icons";
 import { public_api } from "../../env";
+import TableComponent from "../Component/TableComponent";
+import "../../ant-table.css";
+
 const NhapHang = (props) => {
   const history = useNavigate();
   const user = getUser();
@@ -217,6 +220,7 @@ const NhapHang = (props) => {
         columns={col}
         pagination={{ pageSize: 100 }}
       />
+      {/* <TableComponent /> */}
     </Card>
   ) : (
     <App2 />

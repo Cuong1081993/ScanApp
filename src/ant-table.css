@@ -1,4 +1,118 @@
-.ant-table-thead > tr > th.barcode,
-.ant-table-tbody > tr > td.barcode {
-  width: 100px; /* Đặt chiều ngang mong muốn cho cột "Barcode" */
+.ant-table table {
+  font-size: 12px;
+  padding: 5px;
+}
+.ant-typography.ant-typography-danger {
+  color: #ce1f00;
+  font-size: 12px;
+}
+
+input[type="checkbox"] {
+  visibility: hidden;
+}
+input[type="checkbox"]:checked + label {
+  background: #00afce !important;
+}
+.Table-List {
+  max-height: 100%;
+  overflow: auto !important;
+}
+.ant-table-body {
+  overflow-y: auto !important;
+}
+
+.ant-checkbox-wrapper + .ant-checkbox-wrapper {
+  margin-inline-start: 0px;
+}
+.ant-table-wrapper .ant-table.ant-table-small .ant-table-filter-trigger {
+  margin-inline-end: 0px;
+}
+.ant-table-wrapper .ant-table-filter-trigger {
+  position: relative;
+  display: flex;
+  align-items: center;
+  /* margin-block: -4px; */
+  /* margin-inline: 4px -8px; */
+  /* padding: 0 4px; */
+  color: rgba(0, 0, 0, 0.29);
+  font-size: 12px;
+  /* border-radius: 6px; */
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.ant-table-wrapper .ant-table-filter-trigger:hover {
+  color: #00afce;
+  background: none;
+}
+
+.ant-table-wrapper .ant-table-filter-trigger {
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin-block: 0px;
+  margin-inline: 0px 0px;
+  padding: 0 0px;
+  color: rgba(0, 0, 0, 0.29);
+  font-size: 12px;
+  border-radius: 0px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.ant-table-wrapper .ant-table.ant-table-small .ant-table-title,
+.ant-table-wrapper .ant-table.ant-table-small .ant-table-footer,
+.ant-table-wrapper .ant-table.ant-table-small .ant-table-thead > tr > th,
+.ant-table-wrapper .ant-table.ant-table-small .ant-table-tbody > tr > td,
+.ant-table-wrapper .ant-table.ant-table-small tfoot > tr > th,
+.ant-table-wrapper .ant-table.ant-table-small tfoot > tr > td {
+  padding: 3px 3px;
+}
+
+.ant-table-wrapper .ant-table-column-title {
+  position: relative;
+  z-index: 1;
+  flex: 1;
+  text-align: center;
+  padding-right: 0px !important;
+}
+.Table-List {
+  max-height: 100%;
+  overflow: auto !important;
+  margin-bottom: 5px !important;
+}
+.ant-table-column-sorter {
+  margin-inline-start: 4px;
+  color: rgba(0, 0, 0, 0.29);
+  font-size: 0;
+  transition: color 0.3s;
+  margin-left: 0px !important;
+}
+.ant-table-wrapper .ant-table-filter-trigger.active {
+  color: #00afce;
+}
+.ant-table-wrapper .ant-table-column-sorter-up.active,
+:where(.css-dev-only-do-not-override-1s3dcof).ant-table-wrapper
+  .ant-table-column-sorter-down.active {
+  color: #00afce;
+}
+.ant-checkbox-checked .ant-checkbox-inner {
+  background-color: #00afce;
+  border-color: #00afce;
+  z-index: 2;
+}
+.ant-btn-default:not(:disabled):hover {
+  color: #00afce;
+  border-color: #00afce;
+}
+.ant-input:focus,
+.ant-input-focused {
+  border-color: #00afce;
+  box-shadow: 0 0 0 2px rgba(5, 145, 255, 0.1);
+  border-inline-end-width: 1px;
+  outline: 0;
+}
+.ant-input:hover {
+  border-color: #00afce;
+}
+.ant-table-wrapper .ant-table-column-sorters:hover {
+  color: #00afce;
 }

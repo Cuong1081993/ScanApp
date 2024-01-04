@@ -7,6 +7,8 @@ import App2 from "../App2";
 import fileDownload from "js-file-download";
 import { DownloadOutlined, UploadOutlined } from "@ant-design/icons";
 import { public_api } from "../../env";
+import "../../ant-table.css";
+
 const XuatHang = (props) => {
   const history = useNavigate();
   const user = getUser();
@@ -45,6 +47,10 @@ const XuatHang = (props) => {
         return {
           title: key,
           dataIndex: key,
+          render: (text) => (
+            <div style={{ whiteSpace: "normal", maxWidth: "15ch" }}>{text}</div>
+          ),
+          style: { whiteSpace: "normal" },
           key: key,
         };
       });
@@ -212,6 +218,7 @@ const XuatHang = (props) => {
       {/*)}*/}
 
       {contextHolder}
+
       <Table
         dataSource={dataTable}
         columns={col}
