@@ -9,7 +9,7 @@ input[type=checkbox] {
     visibility: hidden;
 }
 input[type=checkbox]:checked + label {
-    background: #00AFCE !important;
+    background: #001529 !important;
 }
 .Table-List{
     max-height: 100%;
@@ -39,7 +39,7 @@ input[type=checkbox]:checked + label {
     transition: all 0.3s;
 }
 .ant-table-wrapper .ant-table-filter-trigger:hover {
-    color: #00AFCE;
+    color: #001529;
      background: none;
 }
 
@@ -64,7 +64,7 @@ input[type=checkbox]:checked + label {
     position: relative;
     z-index: 1;
     flex: 1;
-    text-align: center;
+    text-align: left;
     padding-right: 0px !important;
 }
 .Table-List {
@@ -81,29 +81,29 @@ input[type=checkbox]:checked + label {
 
 }
 .ant-table-wrapper .ant-table-filter-trigger.active {
-    color:  #00AFCE;
+    color:  #001529;
 }
 .ant-table-wrapper .ant-table-column-sorter-up.active, :where(.css-dev-only-do-not-override-1s3dcof).ant-table-wrapper .ant-table-column-sorter-down.active {
-    color: #00AFCE;
+    color: #001529;
 }
 .ant-checkbox-checked .ant-checkbox-inner {
-    background-color: #00AFCE;
-    border-color: #00AFCE;
+    background-color: #001529;
+    border-color: #001529;
     z-index: 2;
 }
 .ant-btn-default:not(:disabled):hover {
-    color: #00AFCE;
-    border-color: #00AFCE;
+    color: #001529;
+    border-color: #001529;
 }
 .ant-input:focus,.ant-input-focused{
-    border-color: #00AFCE;
+    border-color: #001529;
     box-shadow: 0 0 0 2px rgba(5, 145, 255, 0.1);
     border-inline-end-width: 1px;
     outline: 0;
 }
 .ant-input:hover{
-    border-color: #00AFCE;
+    border-color:#001529;
 }
 .ant-table-wrapper .ant-table-column-sorters:hover {
-    color: #00AFCE;
+    color:#001529;
 }

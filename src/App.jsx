@@ -168,7 +168,7 @@ function App() {
           )}
 
           {/* Content */}
-          <Content style={{ margin: "16px" }}>
+          <Content>
             <Routes>
               <Route path="*" element={<Login />} />
               <Route element={<PublicRoutes />}>

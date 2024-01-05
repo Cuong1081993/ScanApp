@@ -5,10 +5,14 @@ import { Space, Card, Table, Upload, Button, Tag, message } from "antd";
 import * as XLSX from "xlsx";
 import App2 from "../App2";
 import fileDownload from "js-file-download";
-import { DownloadOutlined, UploadOutlined } from "@ant-design/icons";
+import {
+  FileExcelOutlined,
+  DownloadOutlined,
+  UploadOutlined,
+} from "@ant-design/icons";
 import { public_api } from "../../env";
-import TableComponent from "../Component/TableComponent";
-import "../../ant-table.css";
+import TableComponent from "../tableComponent";
+import { exportFile } from "../exportFile/exportFile";
 
 const NhapHang = (props) => {
   const history = useNavigate();
@@ -178,6 +182,57 @@ const NhapHang = (props) => {
     fileList,
   };
 
+  const headers = [
+    {
+      title: "order",
+      dataIndex: "order",
+      key: "order",
+      width: 150,
+      filterDropdown: true,
+      sort: "string",
+    },
+    {
+      title: "pallet",
+      dataIndex: "pallet",
+      key: "pallet",
+      width: 150,
+      filterDropdown: true,
+      sort: "string",
+    },
+    {
+      title: "barcode",
+      dataIndex: "barcode",
+      key: "barcode",
+      width: 250,
+      filterDropdown: true,
+      sort: "string",
+    },
+    {
+      title: "nameProduct",
+      dataIndex: "nameProduct",
+      key: "nameProduct",
+      width: 150,
+      filterDropdown: true,
+      sort: "string",
+    },
+    {
+      title: "Khối Lượng",
+      dataIndex: "weightCode",
+      key: "weightCode",
+      width: 70,
+      filterDropdown: true,
+      sort: "number",
+      sum: true,
+    },
+  ];
+  const clns = [
+    "STT",
+    "order",
+    "pallet",
+    "barcode",
+    "nameProduct",
+    "weightCode",
+  ];
   return registered ? (
     <Card
       title="Nhập Hàng"
@@ -185,11 +240,12 @@ const NhapHang = (props) => {
       extra={
         <div>
           <Button
-            icon={<DownloadOutlined />}
+            icon={<FileExcelOutlined />}
             style={{ marginRight: "18px" }}
-            onClick={downloadConfig}
+            // onClick={downloadConfig}
+            onClick={() => exportFile(clns, dataTable, "DATA NHẬP HÀNG", true)}
           >
-            Download Config Sample
+            Export to Excel
           </Button>
           {/* 
           <Upload
@@ -215,12 +271,20 @@ const NhapHang = (props) => {
       {/*)}*/}
 
       {contextHolder}
-      <Table
+      {dataTable && (
+        <div id={"customTable"}>
+          <TableComponent
+            showIndex={true}
+            tableData={dataTable}
+            headers={headers}
+          />
+        </div>
+      )}
+      {/* <Table
         dataSource={dataTable}
         columns={col}
         pagination={{ pageSize: 100 }}
-      />
-      {/* <TableComponent /> */}
+      /> */}
     </Card>
   ) : (
     <App2 />

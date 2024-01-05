@@ -22,7 +22,7 @@ import {
 import axios from "axios";
 // import {Resizable} from 'react-resizable';
 import "./index.css";
-// import FilterTable from "./FilterTable";
+import FilterTable from "./FilterTable";
 // import ResizableTitle from "./component/ResizableTitle";
 import moment from "moment";
 // import Highlighter from 'react-highlight-words';
@@ -126,22 +126,13 @@ const TableComponent = (props) => {
               ) : (
                 ""
               ),
-            align:
-              tableData.length > 0 &&
-              typeof tableData[0][item.dataIndex] === "number"
-                ? "right"
-                : "left",
+            align: tableData.length > 0 ? "left" : "center", //&&  typeof tableData[0][item.dataIndex] === 'number' ? 'left' : 'center',
             dataIndex: item.dataIndex,
             width: item.width,
             render: (text, record) => {
               let value = null;
-              if (item.sum) {
-                console.log("erorr", typeof record[item.dataIndex]);
-                if (record[item.dataIndex]) {
-                  value = record[item.dataIndex].toLocaleString("US");
-                } else {
-                  value = 0;
-                }
+              if (typeof record[item.dataIndex] === "number") {
+                value = record[item.dataIndex];
               } else if (typeof record[item.dataIndex] === "string") {
                 if (item.dateType) {
                   value = dayjs(record[item.dataIndex])
@@ -151,8 +142,6 @@ const TableComponent = (props) => {
                 } else {
                   value = record[item.dataIndex];
                 }
-              } else {
-                value = record[item.dataIndex];
               }
 
               return value;
@@ -294,10 +283,10 @@ const TableComponent = (props) => {
     setState({ ...state, [dataIndex]: selectedKeys });
   };
 
-  const handleReset = (clearFilters, confirm, dataIndex) => {
+  const handleReset = (clearFilters, dataIndex) => {
     clearFilters();
+
     setState({ ...state, [dataIndex]: [] });
-    confirm();
   };
   const options = useCallback(
     (col) => {
@@ -324,11 +313,7 @@ const TableComponent = (props) => {
         })
         .filter((value, index, self) => {
           const indexFound = self.findIndex((i) => i.value === value.value);
-          return (
-            indexFound === index &&
-            value.value != undefined &&
-            value.value?.toString()?.trim()
-          );
+          return indexFound === index && value.value != undefined;
         });
       return result?.concat([{ label: "(Blanks)", value: "blank" }]);
     },
@@ -354,15 +339,33 @@ const TableComponent = (props) => {
         if (!col.filterDropdown) return col;
         return {
           ...col,
-          filterDropdown: {
+          filterDropdown: ({
             setSelectedKeys,
             selectedKeys,
             confirm,
             clearFilters,
+          }) => {
+            return (
+              <div style={{ padding: 8 }}>
+                {
+                  <FilterTable
+                    handleSearch={() =>
+                      handleSearch(selectedKeys, confirm, col.dataIndex)
+                    }
+                    handleReset={() => {
+                      handleReset(clearFilters, col.dataIndex);
+                      // handleSearch(selectedKeys, confirm, col.dataIndex)
+                    }}
+                    setSelectedKeys={setSelectedKeys}
+                    optionsDefault={options(col)}
+                  />
+                }
+              </div>
+            );
           },
           onFilter: (value, record) => {
             if (value === "blank") {
-              return !record[col.dataIndex]?.toString()?.trim();
+              return !record[col.dataIndex];
             }
             if (typeof value === "string") {
               return (
@@ -370,7 +373,7 @@ const TableComponent = (props) => {
               );
             }
             if (!Number.isNaN(record[col.dataIndex])) {
-              return record[col.dataIndex] === value;
+              return record[col.dataIndex] === parseInt(value, 10);
             }
           },
           filterIcon: (filtered) => (

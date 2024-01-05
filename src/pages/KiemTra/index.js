@@ -8,6 +8,8 @@ import fileDownload from "js-file-download";
 import { DownloadOutlined, UploadOutlined } from "@ant-design/icons";
 import { public_api } from "../../env";
 import "../../ant-table.css";
+import TableComponent from "../tableComponent";
+import { exportFile } from "../exportFile/exportFile";
 
 const KiemTra = (props) => {
   const history = useNavigate();
@@ -177,7 +179,34 @@ const KiemTra = (props) => {
     multiple: false,
     fileList,
   };
-
+  const headers = [
+    {
+      title: "barcode",
+      dataIndex: "barcode",
+      key: "barcode",
+      width: 250,
+      filterDropdown: true,
+      sort: "string",
+    },
+    {
+      title: "nameProduct",
+      dataIndex: "nameProduct",
+      key: "nameProduct",
+      width: 150,
+      filterDropdown: true,
+      sort: "string",
+    },
+    {
+      title: "Khối Lượng",
+      dataIndex: "weightCode",
+      key: "weightCode",
+      width: 70,
+      filterDropdown: true,
+      sort: "number",
+      sum: true,
+    },
+  ];
+  const clns = ["STT", "barcode", "nameProduct", "weightCode"];
   return registered ? (
     <Card
       title="Kiểm Tra"
@@ -187,7 +216,7 @@ const KiemTra = (props) => {
           <Button
             icon={<DownloadOutlined />}
             style={{ marginRight: "18px" }}
-            onClick={downloadConfig}
+            onClick={() => exportFile(clns, dataTable, "DATA KIỂM TRA", true)}
           >
             Download Config Sample
           </Button>
@@ -215,11 +244,15 @@ const KiemTra = (props) => {
       {/*)}*/}
 
       {contextHolder}
-      <Table
-        dataSource={dataTable}
-        columns={col}
-        pagination={{ pageSize: 100 }}
-      />
+      {dataTable && (
+        <div id={"customTable"}>
+          <TableComponent
+            showIndex={true}
+            headers={headers}
+            tableData={dataTable || []}
+          />
+        </div>
+      )}
     </Card>
   ) : (
     <App2 />

@@ -5,8 +5,15 @@ import { Space, Card, Table, Upload, Button, Tag, message } from "antd";
 import * as XLSX from "xlsx";
 import App2 from "../App2";
 import fileDownload from "js-file-download";
-import { DownloadOutlined, UploadOutlined } from "@ant-design/icons";
+import {
+  FileExcelOutlined,
+  DownloadOutlined,
+  UploadOutlined,
+} from "@ant-design/icons";
 import { public_api } from "../../env";
+import TableComponent from "../tableComponent";
+import { exportFile } from "../exportFile/exportFile";
+
 const Config = (props) => {
   const history = useNavigate();
   const user = getUser();
@@ -166,7 +173,41 @@ const Config = (props) => {
     multiple: false,
     fileList,
   };
-
+  const headers = [
+    {
+      title: "ten_hang",
+      dataIndex: "ten_hang",
+      key: "ten_hang",
+      width: 100,
+      filterDropdown: true,
+      sort: "string",
+    },
+    {
+      title: "vi_tri",
+      dataIndex: "vi_tri",
+      key: "vi_tri",
+      width: 70,
+      filterDropdown: true,
+      sort: "number",
+    },
+    {
+      title: "ma_AI",
+      dataIndex: "ma_AI",
+      key: "ma_AI",
+      width: 150,
+      filterDropdown: true,
+      sort: "number",
+    },
+    {
+      title: "Bar_code",
+      dataIndex: "Barcode",
+      key: "Barcode",
+      width: 150,
+      filterDropdown: true,
+      sort: "string",
+    },
+  ];
+  const clns = ["STT", "ten_hang", "vi_tri", "ma_AI", "Barcode"];
   return registered ? (
     <Card
       title="Config"
@@ -174,11 +215,11 @@ const Config = (props) => {
       extra={
         <div>
           <Button
-            icon={<DownloadOutlined />}
+            icon={<FileExcelOutlined />}
             style={{ marginRight: "18px" }}
-            onClick={downloadConfig}
+            onClick={() => exportFile(clns, dataTable, "Config", true)}
           >
-            Download Config Sample
+            Export Excel File
           </Button>
 
           <Upload
@@ -204,11 +245,15 @@ const Config = (props) => {
       {/*)}*/}
 
       {contextHolder}
-      <Table
-        dataSource={dataTable}
-        columns={col}
-        pagination={{ pageSize: 100 }}
-      />
+      {dataTable && (
+        <div id={"customTable"}>
+          <TableComponent
+            showIndex={true}
+            headers={headers}
+            tableData={dataTable || []}
+          />
+        </div>
+      )}
     </Card>
   ) : (
     <App2 />

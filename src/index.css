@@ -70,3 +70,7 @@ code {
 .user-info button:hover {
   color: #1890ff; /* Change color on hover */
 }
+.ant-card .ant-card-body {
+  padding: 0px; 
+  border-radius: 0 0 4px 4px; 
+}
